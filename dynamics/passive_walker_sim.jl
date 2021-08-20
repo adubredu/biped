@@ -67,7 +67,8 @@ function single_stance(dz, z, walker, t)
 end
 
 function footstrike(t, z, walker)
-    theta1_n = Z[1]
+    z=z[1]
+    theta1_n = z[1]
     theta2_n = z[3]
     omega1_n = z[2]
     omega2_n = z[4]
@@ -76,7 +77,7 @@ function footstrike(t, z, walker)
     theta2 = -theta2_n
 
     M = walker.M; m = walker.m; I = walker.I
-    l = walker.L; c=walker.c
+    l = walker.l; c=walker.c
 
     J11 = 1;
     J12 = 0;
@@ -111,7 +112,7 @@ function footstrike(t, z, walker)
     A_hs = [A_n_hs -J' ; J zeros((2,2))];
     X_hs = A_hs\b_hs;
     omega = zeros(2)
-    omega[1] = X_h[3]+X_hs[4]; omega[2] = -X_hs[4];
+    omega[1] = X_hs[3]+X_hs[4]; omega[2] = -X_hs[4];
 
     zplus = [theta1 omega[1] theta2 omega[2]]
 end
@@ -126,15 +127,15 @@ function runsteps(z0, walker, steps...)
         steps = [1]
     end
     θ₁ = z0[1]
-    xh = 0
+    xh = 0.0
     yh = l*cos(θ₁)
     xh_start = xh
 
-    t0 = 0
+    t0 = 0.0
     dt = 4
-    time_stamps = 100
+    time_stamps = 10.0
     t_ode = t0
-    z_ode = [z0 xh yh]
+    z_ode = [z0, xh, yh]
 
     # collision_cb = ContinuousCallback(collision_condition, collision_affect!)
     for i=1:steps[1]
@@ -145,6 +146,9 @@ function runsteps(z0, walker, steps...)
 
         z0 = zplus
         t0 = sol.t[end]
+
+        z_temp = sol.u
+        t_temp = sol.t
 
         xh_temp = xh_start + l*sin(z_temp[1,1])-l*sin(z_temp[:,1])
         yh_temp = l*cos(z_temp[:,1])
