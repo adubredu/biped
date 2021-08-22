@@ -4,4 +4,6 @@ Pedagogical Julia scripts for deriving and solving equations of motion for biped
 
 ### Passive Dynamic walker simulation
 Code can be found in `dynamics/passive_walker_sim.jl`
+
+
 ![](dynamics/walker.gif)
