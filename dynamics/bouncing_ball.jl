@@ -21,5 +21,6 @@ u₀ = [50.0, 0.0]
 tspan = (0.0, 50.0)
 g = 9.8
 prob = ODEProblem(f, u₀, tspan, g)
-sol = solve(prob, Tsit5(), callback=cb)
+sol = DifferentialEquations.solve(prob, Tsit5(), callback=cb)
+println(length(sol.u))
 plot(sol)

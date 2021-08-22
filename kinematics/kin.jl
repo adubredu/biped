@@ -12,8 +12,7 @@ yref = c[2].+r*sin.(phis)
 
 anim = Plots.Animation()
 traj = []
-for i = 1:50
-    PyPlot.clf()
+for i = 1:50 
     th1, th2 = solve_ik(xref[i], yref[i])
     p, q = solve_fk(th1, th2)
     pl = draw_arm([[[0,0], p], [p, q]])
