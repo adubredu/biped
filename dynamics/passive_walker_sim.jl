@@ -137,7 +137,7 @@ function runsteps(z0, walker, steps...)
         steps = [1]
     end
     θ₁ = z0[1]
-    xh = -1.0
+    xh = -1.2
     yh = l*cos(θ₁)
     xh_start = xh
 
@@ -235,7 +235,7 @@ q2 = -0.4; u2 = 0.2;03797846807373
 
 z0 = [q1 u1 q2 u2];
 
-steps = 6;
+steps = 8;
 fps = 20;
 zstar = [0.162597833780035  -0.231869638058927  -0.325195667560070   0.03797846807373]
 z, t = runsteps(zstar,walker,steps)
