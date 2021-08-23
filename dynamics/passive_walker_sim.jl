@@ -15,22 +15,6 @@ struct Walker{T}
     γ::T
 end
 
-function fixedpt(z₀, walker)
-    onestep(z₀, walker) - z₀
-end
-
-function partialder(f, z, walker)
-    Δ = 1e-5
-    n = length(z)
-    J = zeros((n,n))
-    for i=1:n
-        ztemp1 = z; ztemp2 = z;
-        ztemp1[i] = ztemp1[i]+Δ
-        ztemp2[i] = ztemp2[i]-Δ
-        J[:,i] = f(ztemp1, walker) - f(ztemp2, walker)
-    end
-    J = j/(2*Δ)
-end
 
 function collision_condition(u, t, integrator)
     θ₁ = u[1]; θ₂ = u[3]
@@ -189,9 +173,7 @@ function animate(ts, zs, walker, steps, fps)
     c = walker.c
 
     mm = size(z, 1)
-    min_xh = min(z[:,3]...); max_xh = max(z[:,3]...)
-    dist_travelled = max_xh - min_xh
-    camera_rate = dist_travelled/mm
+    min_xh = min(z[:,3]...); max_xh = max(z[:,3]...) 
 
     window_xmin = -1*l; window_xmax = 1*l
     window_ymin = -0.1; window_ymax = 1.1*l
