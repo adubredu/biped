@@ -189,7 +189,7 @@ end
 
 
 z0 = [1.017, 1.18]
-steps = 3
+steps = 2
 fps = 30
 zs, ts = runsteps(z0, robot, steps, fps)
 animate(ts, zs, robot, steps, fps)
